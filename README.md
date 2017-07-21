@@ -1,2 +1,2 @@
-java self-studyy
+java self-study
 
