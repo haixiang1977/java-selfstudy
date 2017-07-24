@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- default is build -->
+<project name="fax" basedir="." default="build">
+    <!-- src.dir java source code -->
+    <property name="src.dir" value="src"/>
+    <!-- web.dir web source code -->
+    <property name="web.dir" value="war"/>
+    <!-- build.dir install built -->
+    <property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
+
+    <property name="name" value="fax"/>
+
+    <!-- the path data type is commonly used to represent a class path -->
+    <path id="master-classpath">
+        <!-- fileset used to a collection of files. here select ${web.dir}/WEB-INF/classes/*.jar -->
+        <fileset dir="${web.dir}/WEB-INF/classes">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+    </path>
+
+    <!-- target means action -->
+    <target name="build" description="Complete source tree java files">
+        <!-- mkdir -->
+        <mkdir dir="${build.dir}"/>
+        <!-- javac compile -->
+        <javac destdir="${build.dir}" source="1.5" target="1.5">
+            <src path="${src.dir}"/>
+            <classpath ref_id="master-classpath"/>
+        </javac>
+    </target>
+
+    <target name="clean" description="Clean output directories">
+        <!-- delete all .class files under build dir -->
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </delete>
+    </target>
+
+</project>
